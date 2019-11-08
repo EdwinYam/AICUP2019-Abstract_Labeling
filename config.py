@@ -10,6 +10,8 @@ def cfg():
                     "data_path": "/media/Datasets/PaperAbstract/",
                     "log_dir": "logs",
                     "task": "classification", # classification, labeling
+                    'num_workers': 4,
+                    'drop_fields': ['id','Title','Categories','Created Date','Authors'],
                     }
     experiment_id = np.random.randint(0,1e6)
     if model_config['task'] == 'labeling':

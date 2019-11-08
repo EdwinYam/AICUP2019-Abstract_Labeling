@@ -7,7 +7,11 @@ def set_seed():
     seed = 1234
 
 @config_ingredient.capture
-def 
+def temp(model_config):
+    pass
 
 @ex.automain
 def run(cfg):
+    model_config = cfg['model_config']
+    '''Start spliting dataset to training and validation set'''
+
