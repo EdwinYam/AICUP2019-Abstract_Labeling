@@ -1,28 +1,21 @@
 import torch
 from torch.utils.data import Dataset
 
-class abstructExample(object):
+class abstractExample(object):
     ''' A single training/test example for abstract labeling/classification'''
-    def __init__(self, segment, 
-                 pos_index, 
-                 label=None)
-
+    def __init__(self, segment, pos_index, label=None)
+        ''' Constructs a input example for abstract
+        Args:
+            segment: list. The list of untokenized sentences, which is composed of the target sentence and few sentences before or after the target sentences.
+            pos_index: int. The index of the target sentence within the range of sentences selected
+            label: (Optional) list. The label of the example, in the form of an one-hot vector
+        '''
         self.segment = segment
         self.pos_index = pos_index
         self.label = label
 
-                unique_id=unique_id,
-                example_index=example_index,
-                tokens=word_pieces,
-                input_indices=word_indices,
-                segment_indices=segment_indices,
-                input_mask=input_mask,
-                start_position=start_position,
-                end_position=end_position,
-                label=example.label
-
 class abstractFeature(object):
-    ''' One input sample/instance '''
+    ''' One set of input features for one sample/instance '''
     def __init__(self, unique_id, example_index, tokens, input_indices, segment_indices, input_mask, start_position, end_position, label):
         self.unique_id = unique_id
         self.example_index = example_index
@@ -102,7 +95,7 @@ def preprocess_for_labeling(model_config, df, mode='train'):
                             pos_index=idx,
                             label=labels[idx]))
     
-    if self.mode == 'test':
+    if mode == 'test':
         for instance in df.iterrows():
             abstract = instance[0]['Abstract'].split('$$$')
             for idx, sent in enumerate(abstract):
@@ -124,10 +117,11 @@ def read_abstract_examples(model_config, input_file, is_training=True):
     '''
     Read a PaperAbstract csv file into a list of abstractExample
     ------------------------------------------------------------
-    examples = read_abstract_examples(input_file=input_file,
-                                      is_training=not evaluate,
-                                      version_2_with_negative=model_config['version_2_witt_negative'])
+    examples = read_abstract_examples(model_config,
+                                      input_file=input_file,
+                                      is_training=not evaluate)
     '''
+
     df = pd.read_csv(input_file, sep='\t').fillna('')
     mode = 'train' if is_training else 'test'
     data_list = preprocess_for_labeling(model_config, df, mode)
