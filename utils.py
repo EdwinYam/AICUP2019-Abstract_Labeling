@@ -39,20 +39,51 @@ def save_split_set(model_config):
     words |= collect_words(testset, model_config)
     return words
 
+
+# step 1.
 def data_cleansing(model_config, train_filename='train.tsv', test_filename='test.tsv'): 
     dataset = pd.read_csv(os.path.join(model_config['data_path'], model_config['train_filename']), dtype=str)
     testset = pd.read_csv(os.path.join(model_config['data_path'], model_config['test_filename']), dtype=str)
     
     # Id,Title,Abstract,Authors,Categories,Created Date,Task 1
-    if model_config['drop_info']:
-        for field in model_config["drop_fields"]:
-            dataset.drop(field, axis=1, inplace=True)
-            testset.drop(field, axis=1, inplace=True)
+    dataset.drop(model_config["drop_fields"], axis=1, inplace=True)
+    testset.drop(model_config["drop_fields"], axis=1, inplace=True)
     dataset.to_csv(os.path.join(model_config['data_path'], train_filename), sep='\t', index=False)
     testset.to_csv(os.path.join(model_config['data_path'], test_filename), sep='\t', index=False)
     print('[data info] Training data size: {}'.format(len(dataset)))
     print('[data info] Testing data size: {}'.format(len(testset)))
     print(dataset.Categories.value_counts()/len(dataset))
 
-
+'''
+    data.processors.utils
+'''
+class InputExample(object):
+    '''
+    A single training/test example for simple sequence classification.
         
+    Args:
+        guid: Unique id for the example.
+        text_a: string. The untokenized text of the first sequence. For single
+        sequence tasks, only this sequence must be specified.
+        text_b: (Optional) string. The untokenized text of the second sequence.
+        Only must be specified for sequence pair tasks.
+        label: (Optional) string. The label of the example. This should be
+        specified for train and dev examples, but not for test examples.
+    '''
+    def __init__(self, guid, text_a, text_b=None, label=None):
+        self.guid = guid
+        self.text_a = text_a
+        self.text_b = text_b
+        self.label = label
+
+    def __repr__(self):
+        return str(self.to_json_string())
+
+    def to_dict(self):
+        """Serializes this instance to a Python dictionary."""
+        output = copy.deepcopy(self.__dict__)
+        return output
+
+    def to_json_string(self):
+        """Serializes this instance to a JSON string."""
+        return json.dumps(self.to_dict(), indent=2, sort_keys=True) + "\n"

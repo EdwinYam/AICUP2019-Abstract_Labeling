@@ -1,14 +1,21 @@
 import torch
 from torch.utils.data import Dataset
 
-class abstractExample(object):
+from utils import InputExample
+
+class AbstractExample(InputExample):
     ''' A single training/test example for abstract labeling/classification'''
-    def __init__(self, segment, pos_index, label=None)
+    def __init__(self, guid, segment, pos_index, label=None, text_a=None, text_b=None):
+        super(AbstractExample, self).__init__(guid, text_a, text_b, label)
         ''' Constructs a input example for abstract
         Args:
-            segment: list. The list of untokenized sentences, which is composed of the target sentence and few sentences before or after the target sentences.
-            pos_index: int. The index of the target sentence within the range of sentences selected
-            label: (Optional) list. The label of the example, in the form of an one-hot vector
+            segment: list. The list of untokenized sentences, which is composed 
+            of the target sentence and few sentences before or after the target 
+            sentences.
+            pos_index: int. The index of the target sentence within the range of
+            sentences selected
+            label: (Optional) list. The label of the example, in the form of an 
+            one-hot vector
         '''
         self.segment = segment
         self.pos_index = pos_index
@@ -194,7 +201,7 @@ def convert_examples_to_features(model_config, examples, tokenizer):
 
         
 
-def load_and_cacahe_examples(model_config, tokenizer, evaluate=False, output_examples=False):
+def load_and_cache_examples(model_config, tokenizer, evaluate=False, output_examples=False):
     # Load data features from cache or dataset file
     input_file = 'train.tsv' if evaluate else 'test.tsv'
     cached_features_file = os.path.join(model_config['data_path'], 
@@ -209,8 +216,7 @@ def load_and_cacahe_examples(model_config, tokenizer, evaluate=False, output_exa
     else: 
         print('[Loading data] Creating features from dataset files at {}'.format(input_file))
         examples = read_abstract_examples(input_file=input_file,
-                                          is_training=not evaluate,
-                                          version_2_with_negative=model_config['version_2_with_negative'])
+                                          is_training=not evaluate)
         features = convert_examples_to_features(model_config,
                                                 examples=examples,
                                                 tokenizer=tokenizer)
