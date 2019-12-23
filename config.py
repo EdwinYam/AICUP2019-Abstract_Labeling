@@ -14,6 +14,7 @@ def cfg():
                     'drop_fields': ['id','Title','Categories','Created Date','Authors'],
                     'max_seq_length': 250,
                     'overwrite_cache': False,
+                    'model': 'bert',
                     }
     experiment_id = np.random.randint(0,1e6)
     if model_config['task'] == 'labeling':
