@@ -24,6 +24,7 @@ bash scripts/train_OBJECTIVES.sh output/objectives
 Update the `scripts/train.sh` script with the appropriate datapaths.
 
 ```
+mkdir preds
 bash scripts/predict_public.sh
 bash scripts/predict_private.sh
 ```
