@@ -16,9 +16,9 @@ python csv2json.py [private_testset_path] 'test'
 Use the command `python csv2json.py [datapath] [mode]` to preprocess training and testing data
 
 ```
-bash scripts/train.sh output_dir
-bash scripts/train_BACKGROUND.sh output_dir
-bash scripts/train_OBJECTIVES.sh output_dir
+bash scripts/train.sh output/all
+bash scripts/train_BACKGROUND.sh output/background
+bash scripts/train_OBJECTIVES.sh output/objectives
 ...
 ```
 Update the `scripts/train.sh` script with the appropriate datapaths.
@@ -29,5 +29,5 @@ bash scripts/predict_private.sh
 ```
 Use above command to predict labels
 
-Use `python submission.py` to get the final predicition file `final_submission.csv`
+Use `python submission.py` to get the final prediction file `final_submission.csv`
 
