@@ -1,6 +1,9 @@
 checkpoints
+data
 src
 src_ver1
+csv
+*.csv
 output
 preds
 __pycache__
