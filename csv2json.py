@@ -28,7 +28,7 @@ def csv2json(data_path, split_ratio=0.0):
             data['abstract_id'] = instance['Id']
             data['sentences'] = instance['Abstract'].split('$$$')
             labels = instance['Task 1'].split()
-            data['labels'] = [ l.split('/') for l in labels ]
+            data['labels'] = [ l.split('/')[0] for l in labels ]
         
             if int(split_ratio) > 0:
                 if idx not in dev_indices:

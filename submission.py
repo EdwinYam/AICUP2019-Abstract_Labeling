@@ -10,7 +10,7 @@ predictions = dict()
 raw_predictions = { l:list() for l in label_type }
 for l in label_type:
     
-    with open('preds/preds_{}.txt'.format(l)) as f:
+    with open('preds/preds_public_{}.txt'.format(l)) as f:
         for line in f.readlines():
             raw_predictions[l].append(ast.literal_eval(line))
     for abstract in raw_predictions[l]:
@@ -51,7 +51,7 @@ for sentence_id in list(predictions.keys()):
     if 5 in labels and len(labels) > 1:
         predictions[sentence_id] = predictions[sentence_id][:-1]
 
-csvfile = open('private_submission.csv','w')
+csvfile = open('final_submission.csv','w')
 writer = csv.writer(csvfile)
 #csvfile = open('task1_sample_submission.csv', 'r')
 #rows = csv.reader(csvfile)

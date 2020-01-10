@@ -4,15 +4,16 @@
 
 ```
 pip install -r requirements.txt
+(sudo) python -m spacy download en_core_web_sm
 ```
 Use above command to install required packages
 
-Use the command `python csv2json.py [datapath] [mode]` to preprocess training and testing data
 ```
 python csv2json.py [trainset_path] 'train'
 python csv2json.py [public_testset_path] 'test'
 python csv2json.py [private_testset_path] 'test'
 ```
+Use the command `python csv2json.py [datapath] [mode]` to preprocess training and testing data
 
 ```
 bash scripts/train.sh output_dir
@@ -20,5 +21,13 @@ bash scripts/train_BACKGROUND.sh output_dir
 bash scripts/train_OBJECTIVES.sh output_dir
 ...
 ```
-Update the `scripts/train.sh` script with the appropriate hyperparameters and datapaths.
+Update the `scripts/train.sh` script with the appropriate datapaths.
+
+```
+bash scripts/predict_public.sh
+bash scripts/predict_private.sh
+```
+Use above command to predict labels
+
+Use `python submission.py` to get the final predicition file `final_submission.csv`
 

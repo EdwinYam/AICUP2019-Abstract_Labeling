@@ -205,16 +205,13 @@ class SeqClassificationReader(DatasetReader):
 
         if labels is not None:
             if isinstance(labels[0], list):
-                #fields["labels"] = ListField([
-                #        MultiLabelField(label) for label in labels
-                #    ])
-                # Sequence
-                fields["labels"] = ListField([ MultiLabelField([str(l)+'_label' for l in label]) for label in labels ])
+                fields["labels"] = ListField([
+                        MultiLabelField(label) for label in labels
+                    ])
             else:
                 # make the labels strings for easier identification of the neutral label
                 # probably not strictly necessary
                 if self.sci_sum:
-                    print('1')
                     fields["labels"] = ArrayField(np.array(labels))
                 else:
                     fields["labels"] = ListField([
