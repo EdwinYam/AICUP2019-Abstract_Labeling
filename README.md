@@ -1,5 +1,7 @@
 # <p align=center>AI CUP 2019 Abstract Labeling</p>
 
+We share the [report](https://drive.google.com/drive/folders/1OT7nlSMP1-E_FJkDYe6V4xI0KYhyEJdt) that displays the details of our training process.
+
 ### How to run
 
 ```
@@ -28,7 +30,5 @@ mkdir preds
 bash scripts/predict_public.sh
 bash scripts/predict_private.sh
 ```
-Use above command to predict labels
-
-Use `python submission.py` to get the final prediction file `final_submission.csv`
+Use above command to predict labels, then use `python submission.py` to get the final prediction file `final_submission.csv`
 
