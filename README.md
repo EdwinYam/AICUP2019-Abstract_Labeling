@@ -1,6 +1,8 @@
-# <p align=center>AI CUP 2019 Abstract Labeling</p>
+# <p align=center>AI CUP 2019: Abstract Labeling and Classification</p>
 
-We share the [report](https://drive.google.com/drive/folders/1OT7nlSMP1-E_FJkDYe6V4xI0KYhyEJdt) that displays the details of our training process.
+This is the repo for [AI CUP 2019: Abstract Labeling and Classification](https://tbrain.trendmicro.com.tw/Competitions/Details/8) ([Discussion forum](https://tbrain.trendmicro.com.tw/Discussion/Forum/9))
+
+We share our [report](https://drive.google.com/drive/folders/1OT7nlSMP1-E_FJkDYe6V4xI0KYhyEJdt) that displays the details of our training process.
 
 ### How to run
 
